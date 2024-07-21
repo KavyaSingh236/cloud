@@ -1,12 +1,17 @@
 from flask import Flask, request, jsonify
 import time
+import logging
 
 app = Flask(__name__)
+
+# Set up logging
+logging.basicConfig(level=logging.INFO)
 
 @app.route('/data', methods=['POST'])
 def process_data():
     start_time = time.time()
     data = request.json
+    logging.info(f"Received data: {data}")  # Log the incoming data
     patient = data['patient']
     heart_rate = data['heart_rate']
     blood_pressure = data['blood_pressure']
